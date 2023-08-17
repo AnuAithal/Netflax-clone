@@ -53,54 +53,30 @@ const Movies = ({ fetchUrl }) => {
         ))}
       </div>
       {isModalOpen && (
-        <div className="modal-overlay">
+        <div className="modal-overlay" onClick={handleModalClose}>
           <div className="modal-content">
             <img
               src={`${base_uRL}${selectedImage?.backdrop_path}`}
-              onClick={handleModalClose}
+              
             />
-            <div style={{ padding: "10px", marginLeft: "12px", gap: "20px" }}>
-              <button
-                style={{
-                  width: "100px",
-                  borderRadius: "5px",
-                  paddingRight: "25px",
-                }}
+            <div
+              className="modal-items"
+              style={{ display:'flex',padding: "10px", marginLeft: "12px", gap: "20px" }}
+            >
+              <div
+                className="modal-button"
                 onClick={() => handleTrailer(selectedImage)}
               >
-                Play
-              </button>
-              <img
-                style={{
-                  width: "20px",
-                  marginLeft: "-25px",
-                  marginTop: "-5px",
-                }}
-                
-                src="https://cdn-icons-png.flaticon.com/128/527/527995.png"
-              />
-              <button
-                style={{
-                  width: "100px",
-                  borderRadius: "5px",
-                  paddingRight: "23px",
-                  marginLeft: "17px",
-                }}
-              >
-                My List
-              </button>
-              <img
-                style={{
-                  width: "20px",
-                  marginLeft: "-25px",
-                  marginTop: "-5px",
-                }}
-                src="https://cdn-icons-png.flaticon.com/128/992/992651.png"
-              />
+                ▶ Play
+              </div>
+
+              <div className="modal-button">+ My List</div>
             </div>
-            <div style={{ color: "white", padding: "20px" }}>
+            <div style={{ color: "white", paddingLeft: "20px" }}>
               <h3>{selectedImage?.title}</h3>
-              <p style={{ maxWidth: "450px" }}>{selectedImage?.overview}</p>
+              <p className="modal-overview">
+                {selectedImage?.overview}
+              </p>
             </div>
           </div>
         </div>

@@ -16,6 +16,8 @@ code {
     monospace;
 }
 
+
+
 .container{
   display: flex;
   overflow-y: hidden;
@@ -41,9 +43,8 @@ code {
 
 .postersLarge{
   max-height: 200px;
-  
-  
 }
+
 .movies{
   padding-top: 55px;
 }
@@ -61,15 +62,38 @@ code {
   opacity: 1;
 }
 
-
 .postersLarge:hover{
   transform: scale(1.17);
 }
 
 
 
+.avatar, .nav-item{
+  transition: transform 350ms;
+  
+}
+
+.avatar:hover, .nav-item:hover{
+  transform: scale(1.09);
+}
+.avatar{
+  width: 40px; 
+  margin-left: 950px; 
+  cursor: pointer; 
+  border:solid;
+}
+
+
+
 .carousel{
   color: white;
+  margin-bottom: 20px;
+
+}
+.carousel-item{
+  object-fit: contain;
+  height: 500px;
+  margin-bottom: 50px;
 }
 
 .carouselTitle{
@@ -78,7 +102,6 @@ code {
 }
 
 .carouselDescription{
-  /* width: 45rem; */
   line-height: 1.3;
   font-size: 0.9rem;
   max-width: 360px;
@@ -87,13 +110,69 @@ code {
 
 .carouselImage{
   width: 100%;
-  max-height: 550px;
-  object-fit:fill;
+  height: 100vh;
+
 }
+
+.carousel-button{
+  background-color: white;
+  border: none;
+  width: 85px;
+  height: 33px;
+  border-radius: 5px;
+  transition: transform 350ms;
+}
+
+.carousel-button:hover{
+  transform: scale(1.06);
+  box-shadow: 0 0 5px black;
+  opacity: 1;
+}
+
+.info{
+  background-color: rgba(50, 0, 0, 0.5);
+  border: none;
+  width: 120px;
+  height: 33px;
+  border-radius: 5px;
+  transition: transform 350ms;
+  color: white;
+}
+
+
+.carousel-shadow {
+  position: absolute;
+  bottom: 40px; 
+  left: 0;
+  width: 100%;
+  height: 100px; 
+  background: linear-gradient(transparent, rgba(0, 0, 0, 1));
+  pointer-events: none;
+  z-index: 1;
+}
+.carouselItems{
+  margin-top: -350px;
+  margin-left: 50px;
+}
+
+@media screen and (max-width: 600px) {
+  .carousel-shadow {
+    display: none;
+  }
+  .carouselItems{
+    margin-left: 20px;
+    max-width: 70%;
+  }
+}
+
+
+
 
 ::-webkit-scrollbar{
   display: none;
 }
+
+
 
 .navbar{
   position: fixed;
@@ -109,22 +188,43 @@ code {
 
 .nav-item{
   color: white;
+  flex: 1
+}
+.nav-item.active {
+  color: red; 
+  font-weight: bold;
+  border-bottom: 2px solid red; 
+}
+.nav-item:hover{
+  transform: scale(1.09);
+  font-weight: bold;
+  color: red;
 }
 
-/* Add your existing CSS styles here */
+
+@media screen and (max-width: 500px) {
+  .navbar {
+    position: fixed;
+    margin-top: 10px;
+  }
+  .avatar{
+    margin-left: 180px;
+  }
+}
+
+
 
 .movie-container {
   position: relative;
-  /* Add any other styles for the movie container */
 }
 
 .movie-details {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%; /* Cover the entire card width */
-  height: 100%; /* Cover the entire card height */
-  background-color: rgba(0, 0, 0, 0.8); /* Black with opacity */
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.8); 
   color: white;
   opacity: 0;
   visibility: hidden;
@@ -141,6 +241,7 @@ code {
   opacity: 1;
   visibility: visible;
 }
+
 
 
 .login{
@@ -160,6 +261,7 @@ code {
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
+  margin-top: -25px;
   
   box-shadow: 0 0 70px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
@@ -183,8 +285,6 @@ code {
   width: 100%;
   border: 0;
   height: 45px;
-  
-
   padding: 15px;
   color: #FFFFFF;
   font-size: 14px;
@@ -197,17 +297,23 @@ code {
 }
 
 
+
 .modal-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 700px;
-  height: 700px;
-  background-color: rgba(0, 0, 0, 0.7);
+  width: 42%;
+  height:95%;
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
-  
-  margin-left: 22%;
-  margin-top: 5%;
+  margin-left: 30%;
+  margin-top: 1.5%;
+  border-radius: 40px;
+  z-index: 9999;
+}
+.modal-overview{
+  max-width: 500px;
+  font-size: "16px";
 }
 
 .modal-content {
@@ -216,12 +322,60 @@ code {
 }
 
 .modal-content img {
-  width: 700px;
+  width: 111.1%;
   max-height: 100%;
   border-radius: 40px;
-  
-  
-  /* margin-top: 5%; */
 }
+
+.modal-button {
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  font-weight: bold;
+  background-color: rgba(255,255,255, 0.7);
+  text-align: center;
+  cursor: pointer;
+}
+
+.modal-button:hover{
+  box-shadow: 0 0 10px white;
+}
+
+@media screen and (max-width: 500px) {
+  .modal-overlay {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 55%;
+    margin-top: 30%;
+    margin-left: 10%;
+  }
+  .modal-overview{
+    font-size: 11px;
+  }
+  .carouselDescription{
+    font-size: 10px;
+  }
+  .carouselTitle{
+    font-size: 30px;
+  }
+  .movies{
+    margin-left: -20px;
+  }
+  .carouselImage{
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+  }
+  .avatar{
+    margin-left: 95px;
+  }
+  .form{
+    margin-top: 90px;
+  }
+  
+}
+
+
 
 

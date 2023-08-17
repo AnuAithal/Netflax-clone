@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -11,7 +13,14 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    navigate("/home");
+    if (username.trim() === '' || password.trim() === '') {
+      toast.error('Enter a valid username and password', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 4000,
+      });
+    }else{
+      navigate('/home');
+    }
   };
   const imageURL =
     "https://149695847.v2.pressablecdn.com/wp-content/uploads/2019/05/apps.55787.9007199266246365.687a10a8-4c4a-4a47-8ec5-a95f70d8852d.jpg";
@@ -22,7 +31,7 @@ const Login = () => {
         src="https://www.freepnglogos.com/uploads/netflix-logo-0.png"
       />
       <div class="login-page">
-        <div class="form" style={{ marginTop: "-25px" }}>
+        <div class="form">
           <form class="login-form" onSubmit={handleSubmit}>
             <h2
               style={{
@@ -42,6 +51,7 @@ const Login = () => {
               placeholder="Email"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              style={{color:'white'}}
             />
             <input
               class="inp"
@@ -50,6 +60,7 @@ const Login = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              style={{color:'white'}}
             />
             <button type="submit" style={{ alignContent: "center" }}>
               Sign in
@@ -68,6 +79,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

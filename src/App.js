@@ -2,11 +2,11 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import requests from "./requests";
-import Cards from "./Cards";
 import Movies from "./Movies";
 import Login from "./Login";
 import Signin from "./Signin";
 import MovieTrailer from "./MovieTrailer";
+// import SearchResults from "./SearchResults";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
             element={<Movies fetchUrl={requests.fetchActionMovies} />}
           />
           <Route path="/movietrailer/:id" element={<MovieTrailer />} />
-          {/* <Route path="/movies" elemnt={<Cards title="Action" fetchUrl={requests.fetchComedyMovies}/>} /> */}
+          {/* <Route path="/search" element={<SearchResults />} /> */}
         </Routes>
       </BrowserRouter>
     </div>

@@ -28,7 +28,7 @@ const MovieTrailer = () => {
   console.log(movie);
 
   const opts = {
-    height: "540px",
+    height: "535px",
     width: "100%",
     playerVars: {
       autoplay: 1,

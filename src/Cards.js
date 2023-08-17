@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "./apiHelper";
-import Youtube from "react-youtube";
-import movieTrailer from "movie-trailer";
-import CarouselComp from "./CarouselComp";
+import { useNavigate } from "react-router-dom";
 
 const base_uRL = "https://image.tmdb.org/t/p/original/";
 
 function Cards({ title, fetchUrl, isLargeRow }) {
   const [movies, setMovies] = useState([]);
-  const [trailerUrl, setTrailerUrl] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleClick = (movie) => {
+    setSelectedImage(movie);
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+
+  const handleTrailer = (movie) => {
+    navigate(`/movietrailer/${movie?.id}`);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -27,18 +40,21 @@ function Cards({ title, fetchUrl, isLargeRow }) {
     },
   };
 
-  const handleClick = (movie) => {
-    if (trailerUrl) {
-      setTrailerUrl("");
-    } else {
-      movieTrailer(movie?.name || movie?.original_name || movie?.title || "")
-        .then((url) => {
-          const urlParams = new URLSearchParams(new URL(url).search);
-          setTrailerUrl(urlParams.get("v"));
-        })
-        .catch((error) => console.log(error));
+  function truncateText(text, maxWords, maxChars) {
+    if (!text) {
+      return "";
     }
-  };
+
+    const words = text.split(" ");
+    const truncatedWords = words.slice(0, maxWords);
+    const truncatedText = truncatedWords.join(" ");
+
+    if (truncatedText.length > maxChars) {
+      return truncatedText.slice(0, maxChars) + "...";
+    }
+
+    return truncatedText;
+  }
 
   return (
     <div>
@@ -52,12 +68,42 @@ function Cards({ title, fetchUrl, isLargeRow }) {
               src={`${base_uRL}${
                 isLargeRow ? movie.poster_path : movie.backdrop_path
               }`}
-              
             />
           ))}
         </div>
-        {trailerUrl && <Youtube videoId={trailerUrl} opts={opts} />}
       </div>
+      {isModalOpen && (
+        <div className="modal-overlay" onClick={handleModalClose}>
+          <div className="modal-content">
+            <img src={`${base_uRL}${selectedImage?.backdrop_path}`} />
+
+            <div
+              className="modal-items"
+              style={{
+                display: "flex",
+                padding: "10px",
+                marginLeft: "12px",
+                gap: "20px",
+              }}
+            >
+              <div
+                className="modal-button"
+                onClick={() => handleTrailer(selectedImage)}
+              >
+                ▶ Play
+              </div>
+
+              <div className="modal-button">+ My List</div>
+            </div>
+            <div style={{ color: "white", paddingLeft: "20px" }}>
+              <h3>{selectedImage?.title || selectedImage?.name}</h3>
+              <p style={{ maxWidth: "500px", fontSize: "16px" }}>
+                {truncateText(selectedImage?.overview, 200, 420)}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

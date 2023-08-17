@@ -64,7 +64,7 @@ const Signin = () => {
             }}
           >
             Already have an account?{" "}
-            <span style={{ fontWeight: "bold", cursor:'pointer' }} onClick={()=> {navigate("/login")}}>Sign in.</span>
+            <span style={{ fontWeight: "bold", cursor:'pointer' }} onClick={()=> {navigate("/")}}>Sign in.</span>
           </p>
           
         </div>
