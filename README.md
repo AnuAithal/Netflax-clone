@@ -21,7 +21,7 @@ A clone of the Netflix streaming platform created using React and other technolo
 
 ## Installation
 1. Clone the repository:
-   git clone https://github.com/your-username/netflix-clone.git
+   git clone https://github.com/AnuAithal/netflix-clone.git
 
 2. Navigate to the project directory:
    cd netflix-clone
